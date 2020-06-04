@@ -1,22 +1,18 @@
-# High Scores
-​
-[![Build Status](https://travis-ci.org/jayapriya90/Outline.svg?branch=master)](https://travis-ci.org/jayapriya90/Outline) [![Go Report Card](https://goreportcard.com/badge/github.com/jayapriya90/Outline)](https://goreportcard.com/report/github.com/jayapriya90/Outline)
-
-
 ## Usage
 
+```
+go get github.com/jayapriya90/scores
+```
 
+```
+scores -fpath=<path to input file>
+```
 
 ## Sample Input/Output
 1. Default input parameters
 ```
-$ ./highestnscores
-Key:  13214012 Value:  085a11e1b82b441184f4a193a3c9a13c
-Key:  11446512 Value:  84a0ccfec7d1475b8bfcae1945aea8f0
-Key:  11269569 Value:  7ec85fe3aa3c4dd599e23111e7abf5c1
-Key:  11027069 Value:  f812d487de244023a6a713e496a8427d
-Key:  10622876 Value:  3c867674494e4a7aac9247a9d9a2179c
-2020/05/19 11:06:57 /work/Outline/highestnscores.go:57: Top N Highest Scores: [
+$ ./scores
+2020/06/03 19:38:24 /work/scores/scores.go:79: Top N Scores: [
  {
   "score": 13214012,
   "id": "085a11e1b82b441184f4a193a3c9a13c"
@@ -30,36 +26,25 @@ Key:  10622876 Value:  3c867674494e4a7aac9247a9d9a2179c
   "id": "7ec85fe3aa3c4dd599e23111e7abf5c1"
  }
 ]
-2020/05/19 11:06:57 /work/Outline/highestnscores.go:61: Time taken: 1.672525ms
+Time taken: 888.457µs
 ```
 
 2. Absolute file path in `-fpath` flag (Input file outside of current directory)
 ```
-$ ./highestnscores -fpath=/work/input.txt -n=1
-Key:  13214012 Value:  085a11e1b82b441184f4a193a3c9a13c
-Key:  11446512 Value:  84a0ccfec7d1475b8bfcae1945aea8f0
-Key:  11269569 Value:  7ec85fe3aa3c4dd599e23111e7abf5c1
-Key:  11027069 Value:  f812d487de244023a6a713e496a8427d
-Key:  11025835 Value:  error
-Key:  10622876 Value:  3c867674494e4a7aac9247a9d9a2179c
-2020/05/19 11:09:08 /work/Outline/highestnscores.go:57: Top N Highest Scores: [
+$ ./scores -fpath=/work/input.txt -n=1
+2020/06/03 19:39:01 /work/scores/scores.go:79: Top N Scores: [
  {
   "score": 13214012,
   "id": "085a11e1b82b441184f4a193a3c9a13c"
  }
 ]
-2020/05/19 11:09:08 /work/Outline/highestnscores.go:61: Time taken: 1.35815ms
+Time taken: 1.862121ms
 ```
 
 3. `n` greater than number of records in the input
 ```
-$ ./highestnscores -fpath=input.txt -n=10
-Key:  13214012 Value:  085a11e1b82b441184f4a193a3c9a13c
-Key:  11446512 Value:  84a0ccfec7d1475b8bfcae1945aea8f0
-Key:  11269569 Value:  7ec85fe3aa3c4dd599e23111e7abf5c1
-Key:  11027069 Value:  f812d487de244023a6a713e496a8427d
-Key:  10622876 Value:  3c867674494e4a7aac9247a9d9a2179c
-2020/05/19 11:11:45 /work/Outline/highestnscores.go:57: Top N Highest Scores: [
+$ ./scores -fpath=input.txt -n=10
+2020/06/03 19:39:58 /work/scores/scores.go:79: Top N Scores: [
  {
   "score": 13214012,
   "id": "085a11e1b82b441184f4a193a3c9a13c"
@@ -81,29 +66,22 @@ Key:  10622876 Value:  3c867674494e4a7aac9247a9d9a2179c
   "id": "3c867674494e4a7aac9247a9d9a2179c"
  }
 ]
-2020/05/19 11:11:45 /work/Outline/highestnscores.go:61: Time taken: 1.44767ms
+Time taken: 919.224µs
 ```
 
 4. Input with invalid JSON in the result
 ```
-$ ./highestnscores -fpath=input_with_error.txt -n=5
-Key:  13214012 Value:  085a11e1b82b441184f4a193a3c9a13c
-Key:  11446512 Value:  84a0ccfec7d1475b8bfcae1945aea8f0
-Key:  11269569 Value:  7ec85fe3aa3c4dd599e23111e7abf5c1
-Key:  11027069 Value:  f812d487de244023a6a713e496a8427d
-Key:  11025835 Value:  error
-Key:  10622876 Value:  3c867674494e4a7aac9247a9d9a2179c
-2020/05/19 11:13:08 /work/Outline/highestnscores.go:166: invalid JSON format. JSON decode error
-exit status 1
+$ ./scores -fpath=input_with_error.txt -n=5
+2020/06/03 19:41:23 /work/scores/scores.go:75: invalid JSON format. JSON decode error
 ```
 
 5. Run the command with memory allocation stats
 ```
-$ ./highestnscores -fpath=input.txt -n=10 -memusage
-Heap Allocation = 86424 bytes  Total Allocation = 86424 bytes
-System space = 71125000 bytes
-Mallocs = 190  Frees = 4
-2020/05/21 00:50:52 /work/Outline/highestnscores.go:56: Top N Highest Scores: [
+$ ./scores -fpath=input.txt -n=10 -memusage -persist
+Heap Allocation = 86856 bytes  Total Allocation = 86856 bytes
+System space = 71387144 bytes
+Mallocs = 196  Frees = 4
+2020/06/03 19:43:46 /work/scores/scores.go:79: Top N Scores: [
  {
   "score": 13214012,
   "id": "085a11e1b82b441184f4a193a3c9a13c"
@@ -125,8 +103,9 @@ Mallocs = 190  Frees = 4
   "id": "3c867674494e4a7aac9247a9d9a2179c"
  }
 ]
-Time taken: 891.308µs
-Heap Allocation = 177240 bytes   Total Allocation = 177240 bytes
-System space = 71125000 bytes
-Mallocs = 583  Frees = 62
+2020/06/03 19:43:46 /work/scores/scores.go:222: Wrote 357 bytes to output file
+Time taken: 2.34051ms
+Heap Allocation = 178320 bytes   Total Allocation = 178320 bytes
+System space = 71387144 bytes
+Mallocs = 599  Frees = 63
 ```

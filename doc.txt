@@ -54,15 +54,19 @@ THIS IS NOT JSON
 
 ​
 Other requirements to note about the data files:
-* The `id`s are unique across the data set
-* Scores can repeat, but you should only count the `id` of the _last_ line processed when finding top K `ids` with high scores.
-* Scores are non-negative 32-bit integers.
-* The `id` must be at the root level of the JSON object, if it is not present it is a format error.
-* If n is greater than the input size, print the entire input
+1. The `id`s are unique across the data set
+2. Scores can repeat, but you should only count the `id` of the _last_ line processed when finding top K `ids` with high scores.
+3. Scores are non-negative 32-bit integers.
+4. The `id` must be at the root level of the JSON object, if it is not present it is a format error.
+5. If n is greater than the input size, print the entire input
 ​
 ​
 Upon successful running, the program should exit with exit code 0, any other errors as described above should exit with a non 0 code.
 
+Note
+____
+As per requirement 2, multiple product ids having same score will not be
+considered in top n scores (as previous records will be overwritten) so I doubt if the requirement is asking to fetch top n highest scores.
 
 
 Steps to run the solution
@@ -92,12 +96,12 @@ Usage:
   help    prints the help message
 
 
-6. Build the application. This will generate a binary `highestnscores` in the current directory
+6. Build the application. This will generate a binary `scores` in the current directory
 
 make build
 
 
-7. Run `highestnscores` with path to the file (defaulted to `input.txt`) and the number of top n scores to be returned (defaulted to `3`)
+7. Run `scores` with path to the file (defaulted to `input.txt`) and the number of top n scores to be returned (defaulted to `3`)
 
 ./scores -fpath=input.txt -n=5
 

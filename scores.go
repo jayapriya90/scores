@@ -70,13 +70,13 @@ func main() {
 		log.Fatal(err)
 	}
 
-	jsonResult, err := FindTopNHighestScores(sm, *topn)
+	jsonResult, err := FindHighScores(sm, *topn)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// Write the result to console and (optionally) persist result
-	log.Printf("Top N Highest Scores: %s\n", jsonResult)
+	log.Printf("Top N Scores: %s\n", jsonResult)
 	if *persist {
 		err := writeOutputFile(jsonResult)
 		if err != nil {
@@ -158,9 +158,9 @@ func processInputFile(f string) (map[int]string, error) {
 	return scoreMap, nil
 }
 
-// FindTopNHighestScores returns top n highest scores and their corresponding
-// ids from the hashmap of <score> : <id>
-func FindTopNHighestScores(sm map[int]string, n int) ([]byte, error) {
+// FindHighScores returns n high scores and their corresponding ids from
+// the hashmap of <score> : <id>
+func FindHighScores(sm map[int]string, n int) ([]byte, error) {
 	// As entries in map are unordered, maintain a separate data structure
 	// to maintain sorted order of keys
 	var keys []int
@@ -174,7 +174,6 @@ func FindTopNHighestScores(sm map[int]string, n int) ([]byte, error) {
 	// 	fmt.Println("Key: ", k, "Value: ", sm[k])
 	// }
 
-	// Fetch the top n records with highest scores
 	inputSize := len(keys)
 	var result []Record
 	for i := 0; i < n; i++ {
