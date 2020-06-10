@@ -4,7 +4,8 @@ GO111MODULES=on
 ## build: build the application
 build: clean
 	@echo "Building..."
-	go build -o scores github.com/jayapriya90/scores
+	# go tool dist list command shows a list of supported OS/Arch combinations
+	GOOS=darwin GOARCH=amd64 go build -o scores github.com/jayapriya90/scores
 
 .PHONY: run
 ## run: build and run the application
