@@ -7,14 +7,15 @@ import (
 	"testing"
 )
 
-func Test_FindHighScores(t *testing.T) {
-	m := map[int]string{
+var m = map[int]string {
 		10622876: "3c867674494e4a7aac9247a9d9a2179c",
 		11027069: "f812d487de244023a6a713e496a8427d",
 		11269569: "7ec85fe3aa3c4dd599e23111e7abf5c1",
 		11446512: "84a0ccfec7d1475b8bfcae1945aea8f0",
 		13214012: "085a11e1b82b441184f4a193a3c9a13c",
 	}
+
+func Test_FindHighScores(t *testing.T) {
 	recs := []Record{
 		Record{
 			Score: 13214012,
@@ -42,13 +43,6 @@ func Test_FindHighScores(t *testing.T) {
 }
 
 func Test_FindHighScoresNGreaterThanInputSize(t *testing.T) {
-	m := map[int]string{
-		10622876: "3c867674494e4a7aac9247a9d9a2179c",
-		11027069: "f812d487de244023a6a713e496a8427d",
-		11269569: "7ec85fe3aa3c4dd599e23111e7abf5c1",
-		11446512: "84a0ccfec7d1475b8bfcae1945aea8f0",
-		13214012: "085a11e1b82b441184f4a193a3c9a13c",
-	}
 	recs := []Record{
 		Record{
 			Score: 13214012,
@@ -83,7 +77,7 @@ func Test_FindHighScoresNGreaterThanInputSize(t *testing.T) {
 }
 
 func Test_FindHighScoresInvalidJSON(t *testing.T) {
-	m := map[int]string{
+	im := map[int]string{
 		10622876: "3c867674494e4a7aac9247a9d9a2179c",
 		11025835: "error",
 		11027069: "f812d487de244023a6a713e496a8427d",
@@ -93,6 +87,6 @@ func Test_FindHighScoresInvalidJSON(t *testing.T) {
 	}
 
 	// expectedResponse := invalid JSON format. JSON decode error
-	_, err := FindHighScores(m, 10)
+	_, err := FindHighScores(im, 10)
 	assert.NotEqual(t, nil, err)
 }

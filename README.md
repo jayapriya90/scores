@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/jayapriya90/scores.svg?branch=master)](https://travis-ci.com/jayapriya90/scores)
+[![Build Status](https://travis-ci.com/jayapriya90/scores.svg?branch=master)](https://travis-ci.com/jayapriya90/scores) [![Go Report Card](https://goreportcard.com/badge/github.com/jayapriya90/scores)](https://goreportcard.com/report/github.com/jayapriya90/scores)
 
 ## Usage
 
